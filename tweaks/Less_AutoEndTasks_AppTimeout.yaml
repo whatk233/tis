@@ -17,6 +17,6 @@ tweaks:
       type: "REG_SZ"
       value: "500"
     - key: 'HKEY_CURRENT_USER\Control Panel\Desktop'
-      valueName: "HungAppTimeout"
+      valueName: "WaitToKillServiceTimeout"
       type: "REG_SZ"
       value: "1000"
