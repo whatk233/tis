@@ -1,0 +1,6 @@
+src/test.ts
+src/**/BackUp/*_old*.au3
+build/
+.env
+deno.lock
+src/core/test.au3

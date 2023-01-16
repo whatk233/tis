@@ -1,0 +1,12 @@
+{
+  "imports": {
+    "chalk": "npm:chalk",
+    "dotenvLoad": "https://deno.land/x/dotenv@v3.2.0/load.ts",
+    "yaml": "https://deno.land/std@0.171.0/encoding/yaml.ts",
+    "path": "https://deno.land/std@0.171.0/path/mod.ts",
+    "fs": "https://deno.land/std@0.160.0/fs/mod.ts",
+    "ini": "https://deno.land/x/ini@v2.1.0/mod.ts",
+    "iconv-lite": "https://deno.land/x/iconv_lite@v1.0.2/mod.ts"
+  },
+  "scopes": {}
+}
