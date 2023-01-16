@@ -1,0 +1,12 @@
+meta:
+  en:
+    name: BypassNRO
+    from: C:\Windows\System32\oobe\BypassNRO.cmd
+  zh:
+    name: 绕过 Windows 11 OOBE 强制要求联网
+tweaks:
+  registry:
+    - key: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\OOBE'
+      valueName: "BypassNRO"
+      type: "REG_DWORD"
+      value: "1"

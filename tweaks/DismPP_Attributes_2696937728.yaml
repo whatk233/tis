@@ -1,0 +1,13 @@
+#WOW6432Node?
+meta:
+  en:
+    name: Hide Favorites in Explorer Navigation Window
+    from: DISM++
+  zh:
+    name: 隐藏资源管理器导航窗口中的收藏夹
+tweaks:
+  registry:
+    - key: 'HKEY_CLASSES_ROOT\CLSID\{323CA680-C24D-4099-B94D-446DD2D7249E}\ShellFolder'
+      valueName: "Attributes"
+      type: "REG_DWORD"
+      value: "2696937728"

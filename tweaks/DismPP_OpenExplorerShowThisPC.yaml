@@ -1,0 +1,13 @@
+meta:
+  en:
+    name: Show "This PC" when you open Explorer
+    from: DISM++
+  zh:
+    name: 打开资源管理器时显示此电脑
+applyDefaultUser: true
+tweaks:
+  registry:
+    - key: 'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
+      valueName: "LaunchTo"
+      type: "REG_DWORD"
+      value: "1"

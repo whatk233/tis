@@ -1,0 +1,12 @@
+meta:
+  en:
+    name: Enable Intel TSX
+    from: https://www.landian.vip/archives/66939.html
+  zh:
+    name: 启用英特尔事务同步扩展技术 (Intel TSX)
+    desc: 该技术可以提高英特尔处理器性能，但存在安全漏洞，所以系统默认会禁用该技术，详情可参考：https://www.landian.vip/archives/66939.html
+tweaks:
+  registry:
+    - key: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel'
+      valueName: "DisableTsx"
+      action: delete

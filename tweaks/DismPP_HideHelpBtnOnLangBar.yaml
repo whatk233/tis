@@ -1,0 +1,13 @@
+meta:
+  en:
+    name: Hide the help button on the language bar
+    from: DISM++（by 溯汐潮）
+  zh:
+    name: 隐藏语言栏上的帮助按钮
+applyDefaultUser: true
+tweaks:
+  registry:
+    - key: 'HKEY_CURRENT_USER\Software\Microsoft\CTF\LangBar\ItemState\{ED9D5450-EBE6-4255-8289-F8A31E687228}'
+      valueName: "DemoteLevel"
+      type: "REG_DWORD"
+      value: "3"

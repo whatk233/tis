@@ -1,0 +1,17 @@
+meta:
+  en:
+    name: Hide the language bar to the taskbar
+    from: DISM++（by 溯汐潮）
+  zh:
+    name: 将语言栏隐藏到任务栏
+applyDefaultUser: true
+tweaks:
+  registry:
+    - key: 'HKEY_CURRENT_USER\Software\Microsoft\CTF\LangBar'
+      valueName: "ShowStatus"
+      type: "REG_DWORD"
+      value: "4"
+    - key: 'HKEY_CURRENT_USER\Software\Microsoft\CTF\LangBar'
+      valueName: "ExtraIconsOnMinimized"
+      type: "REG_DWORD"
+      value: "0"

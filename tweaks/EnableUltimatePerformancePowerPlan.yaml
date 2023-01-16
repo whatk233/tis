@@ -1,0 +1,11 @@
+meta:
+  en:
+    name: Enable Ultimate Performance Power Plan
+  zh:
+    name: 启用卓越性能电源计划
+tweaks:
+  run:
+    - command: "powercfg.exe -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61"
+      defaultApplyMode: desktop
+    - command: "powercfg.exe /SETACTIVE e9a42b02-d5df-448d-aa00-03f14749eb61"
+      defaultApplyMode: desktop

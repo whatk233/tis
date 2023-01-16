@@ -1,0 +1,12 @@
+meta:
+  en:
+    name: Automatically install updates without restart
+    from: DISM++（by Rambin)
+  zh:
+    name: 自动安装无需重启的更新
+tweaks:
+  registry:
+    - key: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU'
+      valueName: "AutoInstallMinorUpdates"
+      type: "REG_DWORD"
+      value: "1"

@@ -1,0 +1,30 @@
+#WOW6432Node?
+meta:
+  en:
+    name: Disable the "Always available offline" right-click menu for directories, folders, all objects
+    from: DISM++
+  zh:
+    name: 禁用目录、文件夹、所有对象、的“始终脱机可用”右键菜单
+tweaks:
+  registry:
+    # Dism++ switch compatible
+    - key: 'HKEY_CLASSES_ROOT\Directory\shellex\-ContextMenuHandlers\Offline Files'
+      valueName: ""
+      type: "REG_SZ"
+      value: "{474C98EE-CF3D-41f5-80E3-4AAB0AB04301}"
+    # Dism++ switch compatible
+    - key: 'HKEY_CLASSES_ROOT\Folder\ShellEx\-ContextMenuHandlers\Offline Files'
+      valueName: ""
+      type: "REG_SZ"
+      value: "{474C98EE-CF3D-41f5-80E3-4AAB0AB04301}"
+    # Dism++ switch compatible
+    - key: 'HKEY_CLASSES_ROOT\AllFilesystemObjects\shellex\-ContextMenuHandlers\{474C98EE-CF3D-41f5-80E3-4AAB0AB04301}'
+      valueName: ""
+      type: ""
+      value: ""
+    - key: 'HKEY_CLASSES_ROOT\Directory\shellex\ContextMenuHandlers\Offline Files'
+      action: delete
+    - key: 'HKEY_CLASSES_ROOT\Folder\ShellEx\ContextMenuHandlers\Offline Files'
+      action: delete
+    - key: 'HKEY_CLASSES_ROOT\AllFilesystemObjects\shellex\ContextMenuHandlers\{474C98EE-CF3D-41f5-80E3-4AAB0AB04301}'
+      action: delete

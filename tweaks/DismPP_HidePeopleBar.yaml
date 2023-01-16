@@ -1,0 +1,17 @@
+meta:
+  en:
+    name: Hide Taskbar PeopleBar
+    from: DISM++（by 、Cloud.）
+  zh:
+    name: 隐藏任务栏上的人脉
+applyDefaultUser: true
+tweaks:
+  registry:
+    - key: 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People'
+      valueName: "PeopleBand"
+      type: "REG_DWORD"
+      value: "0"
+    - key: 'HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Explorer'
+      valueName: "HidePeopleBar"
+      type: "REG_DWORD"
+      value: "1"

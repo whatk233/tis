@@ -1,0 +1,13 @@
+meta:
+  en:
+    name: Microsoft Pinyin turns on fuzzy input
+    from: DISM++（by 朽木）
+  zh:
+    name: 微软拼音开启模糊音
+applyDefaultUser: true
+tweaks:
+  registry:
+    - key: 'HKEY_CURRENT_USER\SOFTWARE\Microsoft\InputMethod\Settings\CHS'
+      valueName: "Enable Fuzzy Input"
+      type: "REG_DWORD"
+      value: "1"

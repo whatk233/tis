@@ -1,0 +1,11 @@
+meta:
+  en:
+    name: Disbale DiagTrack Service
+  zh:
+    name: 禁用诊断跟踪服务
+tweaks:
+  run:
+    - command: "sc config DiagTrack start=  DISABLED"
+      defaultApplyMode: desktop
+    - command: "net stop DiagTrack"
+      defaultApplyMode: desktop

@@ -1,0 +1,13 @@
+meta:
+  en:
+    name: IE closes the suggested website
+    from: DISM++（by 原罪）
+  zh:
+    name: IE 关闭建议的网站
+applyDefaultUser: true
+tweaks:
+  registry:
+    - key: 'HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Suggested Sites'
+      valueName: "Enabled"
+      type: "REG_DWORD"
+      value: "0"

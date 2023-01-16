@@ -1,0 +1,13 @@
+meta:
+  en:
+    name: Microsoft Pinyin is input in English by default
+    from: DISM++（by Rambin）
+  zh:
+    name: 微软拼音默认为英语输入
+applyDefaultUser: true
+tweaks:
+  registry:
+    - key: 'HKEY_CURRENT_USER\SOFTWARE\Microsoft\InputMethod\Settings\CHS'
+      valueName: "Default Mode"
+      type: "REG_DWORD"
+      value: "1"

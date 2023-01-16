@@ -1,0 +1,9 @@
+meta:
+  en:
+    name: Delete Defrag Scheduled
+  zh:
+    name: 删除自动整理碎片计划
+tweaks:
+  run:
+    - command: 'schtasks /Delete /F /tn \Microsoft\Windows\Defrag\ScheduledDefrag'
+      defaultApplyMode: desktop

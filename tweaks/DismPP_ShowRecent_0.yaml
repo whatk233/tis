@@ -1,0 +1,13 @@
+meta:
+  en:
+    name: Quick Access does not display recently used files
+    from: DISM++（by 溯汐潮）
+  zh:
+    name: 快速访问不显示最近使用的文件
+applyDefaultUser: true
+tweaks:
+  registry:
+    - key: 'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer'
+      valueName: "ShowRecent"
+      type: "REG_DWORD"
+      value: "0"

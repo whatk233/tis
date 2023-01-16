@@ -1,0 +1,12 @@
+meta:
+  en:
+    name: Turn off Remote Assistance
+    from: DISM++（by 518516.net)
+  zh:
+    name: 关闭远程协助
+tweaks:
+  registry:
+    - key: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Remote Assistance'
+      valueName: "AllowToGetHelp"
+      type: "REG_DWORD"
+      value: "0"

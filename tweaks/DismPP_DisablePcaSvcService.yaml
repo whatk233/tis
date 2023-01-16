@@ -1,0 +1,9 @@
+meta:
+  en:
+    name: Disable Program Compatibility Assistant
+    from: DISM++（by 一叶微风TM)
+  zh:
+    name: 禁用程序兼容性助手
+tweaks:
+  run:
+    - command: "sc config PcaSvc start=disabled"

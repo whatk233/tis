@@ -1,0 +1,17 @@
+meta:
+  en:
+    name: Displays the colors of the start menu, taskbar, action center, and title bar
+    from: DISM++ (by Rambin)
+  zh:
+    name: 显示开始菜单、任务栏、操作中心和标题栏的颜色
+applyDefaultUser: true
+tweaks:
+  registry:
+    - key: 'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize'
+      valueName: "ColorPrevalence"
+      type: "REG_DWORD"
+      value: "1"
+    - key: 'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\DWM'
+      valueName: "ColorPrevalence"
+      type: "REG_DWORD"
+      value: "1"

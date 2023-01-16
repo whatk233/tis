@@ -1,0 +1,9 @@
+meta:
+  en:
+    name: Disable Hibernate
+  zh:
+    name: 关闭系统休眠
+tweaks:
+  run:
+    - command: "powercfg.exe /hibernate off"
+      defaultApplyMode: desktop

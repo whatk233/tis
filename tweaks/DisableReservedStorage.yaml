@@ -1,0 +1,8 @@
+meta:
+  en:
+    name: Disable system reserved storage
+  zh:
+    name: 禁用系统保留空间
+tweaks:
+  run:
+    - command: "dism /Online /Set-ReservedStorageState /State:Disabled"

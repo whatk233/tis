@@ -1,0 +1,16 @@
+#WOW6432Node?
+meta:
+  en:
+    name: Disable the Sharing right-click menu for all objects
+    from: DISM++
+  zh:
+    name: 禁用所有对象的“共享”右键菜单
+tweaks:
+  registry:
+    # Dism++ switch compatible
+    - key: 'HKEY_CLASSES_ROOT\*\shellex\-ContextMenuHandlers\ModernSharing'
+      valueName: ""
+      type: "REG_SZ"
+      value: "{e2bf9676-5f8f-435c-97eb-11607a5bedf7}"
+    - key: 'HKEY_CLASSES_ROOT\*\shellex\ContextMenuHandlers\ModernSharing'
+      action: delete

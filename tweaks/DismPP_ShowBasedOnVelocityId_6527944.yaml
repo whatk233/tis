@@ -1,0 +1,22 @@
+meta:
+  en:
+    name: Show here when right-clicking Shift Open the command window
+    from: DISM++（by sandtechnology）
+  zh:
+    name: Shift 右击时显示在此处打开命令窗口
+tweaks:
+  registry:
+    - key: 'HKEY_CLASSES_ROOT\Directory\shell\cmd'
+      valueName: "HideBasedOnVelocityId"
+      action: delete
+    - key: 'HKEY_CLASSES_ROOT\Directory\Background\shell\cmd'
+      valueName: "HideBasedOnVelocityId"
+      action: delete
+    - key: 'HKEY_CLASSES_ROOT\Directory\shell\cmd'
+      valueName: "ShowBasedOnVelocityId"
+      type: "REG_DWORD"
+      value: "6527944"
+    - key: 'HKEY_CLASSES_ROOT\Directory\Background\shell\cmd'
+      valueName: "ShowBasedOnVelocityId"
+      type: "REG_DWORD"
+      value: "6527944"

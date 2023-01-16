@@ -1,0 +1,48 @@
+meta:
+  en:
+    name: Enable Windows Photo Viewer
+    from: DISM++（by 心之所向)
+  zh:
+    name: 启用 Windows 照片查看器
+tweaks:
+  registry:
+    - key: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations'
+      valueName: ".jpg"
+      type: "REG_SZ"
+      value: "PhotoViewer.FileAssoc.Tiff"
+    - key: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations'
+      valueName: ".png"
+      type: "REG_SZ"
+      value: "PhotoViewer.FileAssoc.Tiff"
+    - key: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations'
+      valueName: ".jpeg"
+      type: "REG_SZ"
+      value: "PhotoViewer.FileAssoc.Tiff"
+    - key: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations'
+      valueName: ".bmp"
+      type: "REG_SZ"
+      value: "PhotoViewer.FileAssoc.Tiff"
+    - key: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations'
+      valueName: ".jpe"
+      type: "REG_SZ"
+      value: "PhotoViewer.FileAssoc.Tiff"
+    - key: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations'
+      valueName: ".jfif"
+      type: "REG_SZ"
+      value: "PhotoViewer.FileAssoc.Tiff"
+    - key: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations'
+      valueName: ".dib"
+      type: "REG_SZ"
+      value: "PhotoViewer.FileAssoc.Tiff"
+    - key: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations'
+      valueName: ".ico"
+      type: "REG_SZ"
+      value: "PhotoViewer.FileAssoc.Tiff"
+    - key: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations'
+      valueName: ".gif"
+      type: "REG_SZ"
+      value: "PhotoViewer.FileAssoc.Tiff"
+    - key: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations'
+      valueName: ".tga"
+      type: "REG_SZ"
+      value: "PhotoViewer.FileAssoc.Tiff"

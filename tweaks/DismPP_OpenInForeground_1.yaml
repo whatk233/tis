@@ -1,0 +1,13 @@
+meta:
+  en:
+    name: When creating a new tab, always switch to the new tab
+    from: DISM++（by 一叶微风TM）
+  zh:
+    name: 当创建新选项卡时，始终切换到新选项卡
+applyDefaultUser: true
+tweaks:
+  registry:
+    - key: 'HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\TabbedBrowsing'
+      valueName: "OpenInForeground"
+      type: "REG_DWORD"
+      value: "1"

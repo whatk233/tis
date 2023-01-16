@@ -1,0 +1,12 @@
+meta:
+  en:
+    name: Hide Windows 11 unsupported hardware watermark/notification
+  zh:
+    name: 隐藏 Windows 11 不受支持硬件水印/通知
+applyDefaultUser: true
+tweaks:
+  registry:
+    - key: 'HKEY_CURRENT_USER\Control Panel\UnsupportedHardwareNotificationCache'
+      valueName: "SV2"
+      type: "REG_DWORD"
+      value: "0"

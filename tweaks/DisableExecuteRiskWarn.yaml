@@ -1,0 +1,13 @@
+meta:
+  en:
+    name: Turn off Security Warnings for open programs
+    from: internet
+  zh:
+    name: 关闭打开程序的“安全警告”
+applyDefaultUser: true
+tweaks:
+  registry:
+    - key: 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Associations'
+      valueName: "ModRiskFileTypes"
+      type: "REG_SZ"
+      value: ".bat;.exe;.reg;.vbs;.chm;.msi;.js;.cmd"

@@ -1,0 +1,36 @@
+meta:
+  en:
+    name: Disable windows some promotion
+    desc: It is not allowed to display suggestions on the start menu, close store app promotion, close Windows focus promotion when locking screen, close "Get tips and suggestions when using Windows", and prohibit automatic installation of recommended applications
+    from: DISM++
+  zh:
+    name: 关闭 Windows 部分推广提示
+    desc: 不允许在开始菜单显示建议、关闭商店应用推广、关闭锁屏时的Windows 聚焦推广、关闭“使用Windows时获取技巧和建议”、禁止自动安装推荐的应用程序
+applyDefaultUser: true
+tweaks:
+  registry:
+    # 不允许在开始菜单显示建议 （by powerxing04）
+    - key: 'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager'
+      valueName: "SubscribedContent-338389Enabled"
+      type: "REG_DWORD"
+      value: "1"
+    # 关闭商店应用推广（by 、Cloud.）
+    - key: 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager'
+      valueName: "PreInstalledAppsEnabled"
+      type: "REG_DWORD"
+      value: "0"
+    # 关闭锁屏时的Windows 聚焦推广（by 、Cloud.）
+    - key: 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager'
+      valueName: "RotatingLockScreenEnable"
+      type: "REG_DWORD"
+      value: "0"
+    # 关闭“使用Windows时获取技巧和建议”（by 、Cloud.）
+    - key: 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager'
+      valueName: "SoftLandingEnabled"
+      type: "REG_DWORD"
+      value: "0"
+    # 禁止自动安装推荐的应用程序（by IT之家）
+    - key: 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager'
+      valueName: "SilentInstalledAppsEnabled"
+      type: "REG_DWORD"
+      value: "0"

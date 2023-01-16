@@ -1,0 +1,16 @@
+#WOW6432Node?
+meta:
+  en:
+    name: Disable the "Open Portable" right-click menu of the disk
+    from: DISM++ （by 莫失莫忘）
+  zh:
+    name: 禁用磁盘的“以便携式方式打开”右键菜单
+tweaks:
+  registry:
+    # Dism++ switch compatible
+    - key: 'HKEY_CLASSES_ROOT\Drive\shellex\-ContextMenuHandlers\{D6791A63-E7E2-4fee-BF52-5DED8E86E9B8}'
+      valueName: "{D6791A63-E7E2-4fee-BF52-5DED8E86E9B8}"
+      type: "REG_SZ"
+      value: "Portable Devices Menu"
+    - key: 'HKEY_CLASSES_ROOT\Drive\shellex\ContextMenuHandlers\{D6791A63-E7E2-4fee-BF52-5DED8E86E9B8}'
+      action: delete

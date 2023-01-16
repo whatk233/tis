@@ -1,0 +1,22 @@
+meta:
+  en:
+    name: Reduce the waiting time for shutdown and automatically end the program when shutdown
+    from: internet
+  zh:
+    name: 减少关机等待时间、关机时自动结束程序
+    from: 互联网
+applyDefaultUser: true
+tweaks:
+  registry:
+    - key: 'HKEY_CURRENT_USER\Control Panel\Desktop'
+      valueName: "AutoEndTasks"
+      type: "REG_SZ"
+      value: "1"
+    - key: 'HKEY_CURRENT_USER\Control Panel\Desktop'
+      valueName: "HungAppTimeout"
+      type: "REG_SZ"
+      value: "500"
+    - key: 'HKEY_CURRENT_USER\Control Panel\Desktop'
+      valueName: "HungAppTimeout"
+      type: "REG_SZ"
+      value: "1000"

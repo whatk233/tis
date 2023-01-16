@@ -1,0 +1,10 @@
+meta:
+  en:
+    name: Disbale Computer Restore
+  zh:
+    name: 禁用系统还原
+tweaks:
+  run:
+    - command: 'Disable-ComputerRestore -Drive "$env:SYSTEMDRIVE"'
+      defaultApplyMode: desktop
+      action: pwsh

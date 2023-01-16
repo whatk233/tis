@@ -1,0 +1,15 @@
+meta:
+  en:
+    name: Disbale HomeGroup Service
+  zh:
+    name: 禁用家庭组服务
+tweaks:
+  run:
+    - command: "sc config HomeGroupListener start=  DISABLED"
+      defaultApplyMode: desktop
+    - command: "net stop HomeGroupListener"
+      defaultApplyMode: desktop
+    - command: "sc config HomeGroupProvider start=  DISABLED"
+      defaultApplyMode: desktop
+    - command: "net stop HomeGroupProvider"
+      defaultApplyMode: desktop

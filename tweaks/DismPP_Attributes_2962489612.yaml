@@ -1,0 +1,13 @@
+#WOW6432Node?
+meta:
+  en:
+    name: Hide homegroups in the Explorer navigation window
+    from: DISM++
+  zh:
+    name: 隐藏资源管理器导航窗口中的家庭组
+tweaks:
+  registry:
+    - key: 'HKEY_CLASSES_ROOT\CLSID\{B4FB3F98-C1EA-428d-A78A-D1F5659CBA93}\ShellFolder'
+      valueName: "Attributes"
+      type: "REG_DWORD"
+      value: "2962489612"
