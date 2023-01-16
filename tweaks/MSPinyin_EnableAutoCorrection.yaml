@@ -1,13 +1,12 @@
 meta:
   en:
-    name: Microsoft Pinyin turns on fuzzy input
-    from: DISM++（by 朽木）
+    name: Microsoft Pinyin turns on "Auto Correction"
   zh:
-    name: 微软拼音开启模糊音
+    name: 微软拼音开启“自动拼音纠错”
 applyDefaultUser: true
 tweaks:
   registry:
     - key: 'HKEY_CURRENT_USER\SOFTWARE\Microsoft\InputMethod\Settings\CHS'
-      valueName: "Enable Fuzzy Input"
+      valueName: "Enable Auto Correction"
       type: "REG_DWORD"
       value: "1"
