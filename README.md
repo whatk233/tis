@@ -17,9 +17,10 @@ It makes it easier to tweak/setup (optimize) Windows in the Sysprep, and makes t
 * Diary system
 
 ## 🎛️ Usage
-Download and unzip, edit the `config.ini` configuration file.
-Run `tis.exe /tweak` during the "Sysprep process" and "when you first enter the desktop".
-There is no prompt during the execution, and it will exit automatically after completion
+Download the compiled TIS main program from [Releases](https://github.com/whatk233/tis/releases)		
+Unzip, edit the `config.ini` configuration file.		
+Run `tis.exe /tweak` during the "Sysprep process" and "when you first enter the desktop".		
+There is no prompt during the execution, and it will exit automatically after completion		
 
 ## 👥 Contributions
 The tweak rules of TIS are in need of your contribution, please see "Contribution" for details
