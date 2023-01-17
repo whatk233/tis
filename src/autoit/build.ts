@@ -52,12 +52,12 @@ export async function buildTis() {
 }
 
 export function getAutoIt3WrapperPath() {
-  const AU3_COMPILER_TOOLKIT = Deno.env.get("AU3_COMPILER_TOOLKIT");
-  if (!AU3_COMPILER_TOOLKIT) {
-    throw new Error("AU3_COMPILER_TOOLKIT env is emtpy!");
+  const AUTOIT_COMPILER_TOOLKIT = Deno.env.get("AUTOIT_COMPILER_TOOLKIT");
+  if (!AUTOIT_COMPILER_TOOLKIT) {
+    throw new Error("AUTOIT_COMPILER_TOOLKIT env is emtpy!");
   }
   const autoIt3WrapperBinPATH = resolve(
-    AU3_COMPILER_TOOLKIT,
+    AUTOIT_COMPILER_TOOLKIT,
     AUTOIT3WRAPPER_PATH
   );
   if (!Deno.statSync(autoIt3WrapperBinPATH).isFile) {
