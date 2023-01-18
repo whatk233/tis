@@ -1,0 +1,26 @@
+import { Callout } from "nextra-theme-docs";
+
+# Configuration
+
+The configuration file is called `config.ini` and is usually located in the same directory as the main TIS program (tis.exe).
+
+The configuration file determines which tuning rules are applied when the program is run.
+
+Example:
+```ini
+[DisableFristLoginInstallOD]
+; name: First login not install OneDrive
+; from: internet
+; name: 禁止首次开机启动时安装 OneDrive
+apply=1 
+applyDefaultUser=1
+```
+
+* apply: Apply this tweak
+* applyDefaultUser: Apply all user (new user)
+
+`0` or leave blank is `false` (disable), `1` is `true` (enable)
+
+<Callout type="warning">
+  TIS is not compatible with boolean values (true,false), please use numeric values
+</Callout>

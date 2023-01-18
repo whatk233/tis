@@ -1,0 +1,24 @@
+import { Callout } from "nextra-theme-docs";
+
+# 开发
+
+<Callout type="warning">
+  如果只是想使用 TIS ，按照
+  [使用方法](/zh#%EF%B8%8F-%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95) 使用即可
+</Callout>
+
+## 环境
+
+- Deno (1.29.3 或更高)
+- [Autoit Compiler Toolkit](https://github.com/whatk233/setup-autoit-compiler-toolkit/releases/download/toolkit/autoit_compiler_toolkit_v3.3.16.1_230116.zip)
+- Windows 操作系统 (编译 TIS Core 需要)
+
+## 配置开发环境
+
+1. 安装 Deno
+2. 下载 Autoit Compiler Toolkit 并解压
+3. 将 Autoit Compiler Toolkit 设置为系统/环境变量，变量名为 `AUTOIT_COMPILER_TOOLKIT`
+
+## 编译 TIS Core
+
+执行 `deno task build`，编译好的二进制文件、配置文件会存放在 `/build` 文件夹中

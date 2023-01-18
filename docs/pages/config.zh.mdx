@@ -1,0 +1,26 @@
+import { Callout } from "nextra-theme-docs";
+
+# 配置
+
+配置文件名为`config.ini`，通常与 TIS 主程序 (tis.exe) 放在同个目录中
+
+配置文件能决定程序运行时会应用哪些调整规则
+
+例子：
+```ini
+[DisableFristLoginInstallOD]
+; name: First login not install OneDrive
+; from: internet
+; name: 禁止首次开机启动时安装 OneDrive
+apply=1 
+applyDefaultUser=1
+```
+
+* apply: 是否应用该调整
+* applyDefaultUser: 是否应用到所有新建用户
+
+`0`或留空为`false`(不生效)，`1`为`true`(生效)
+
+<Callout type="warning">
+  TIS 未对布尔值 (true,false) 做兼容，请使用数字值
+</Callout>

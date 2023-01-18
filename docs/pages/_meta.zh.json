@@ -1,0 +1,11 @@
+{
+  "index": "介绍",
+  "contribution": "贡献",
+  "config": "配置",
+  "advanced": "高级",
+  "github_link": {
+    "title": "Github",
+    "href": "https://github.com/whatk233/tis",
+    "newWindow": true
+  }
+}

@@ -1,0 +1,268 @@
+import { Callout } from "nextra-theme-docs";
+
+# 规则文件语法
+
+## 关于 YAML 语法
+
+YAML 是一种数据序列化语言，通常用于编写配置文件，最常见的用途之一是创建配置文件。相比 JSON，因为 YAML 有更好的可读性，对用户更友好。
+
+YAML 的后缀名为`.yaml`,`.yml`，但是 TIS 暂时只会识别`.yaml`的规则文件。
+
+### YAML 相关教程
+
+- [YAML 入门教程 - runoob.com](https://www.runoob.com/w3cnote/yaml-intro.html)
+- [YAML 语言教程 - 阮一峰](https://www.ruanyifeng.com/blog/2016/07/yaml.html)
+
+## 规则目录
+位于项目文件夹 `/tweaks` 中
+
+## 命名规则
+
+具体规则待定，暂时可参考现有的配置文件进行命名。
+
+开头需要使用大写字母，文件名不要存在空格、非英文字母。
+
+尽量避免使用拼音、拼音缩写，因为该项目是同时面向海外的，可能存在母语并非汉语的贡献者，他们就不太好理解这些“字符”所表达的意思了，例如 `禁用 = jinyong = jy`、`启用 = qiyong = qy` 之类的。
+
+请勿使用 `111111`、`aaaaa` 、`fje9fhj9e` 等纯字符、乱码字符等无意义命名。
+
+## 语法
+
+### 例子
+
+```yaml
+# 基本信息
+meta:
+  en:
+    name: name
+    desc: desc (Optional)
+    from: origin (Optional)
+  zh:
+    作用: 作用
+    介绍: 简介 (可选)
+    来源: 来源 (可选)
+# 应用到所有新建账户中
+applyDefaultUser: true
+tweaks:
+  # 注册表规则
+  registry:
+    - key: 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Feeds' # 注册表键名
+      valueName: "ShellFeedsTaskbarViewMode" # 注册表值名
+      type: "REG_DWORD" # 键的类型
+      value: "2" # 值
+    - key:
+      valueName: 'HKEY_CLASSES_ROOT\CLSID\{323CA680-C24D-4099-B94D-446DD2D7249E}\ShellFolder'
+      action: delete # 动作为删除
+  # 运行规则
+  run:
+    - command: "dism /Online /Set-ReservedStorageState /State:Disabled" # 运行命令
+      action: cmd # 方式
+    - command: "powercfg.exe /hibernate off" # 运行命令
+      action: cmd # 方式
+      showWindow: true # 显示窗口
+      defaultApplyMode: desktop # 应用场景
+    - command: 'Disable-ComputerRestore -Drive "$env:SYSTEMDRIVE"' # 运行命令
+      action: pwsh # 方式
+      defaultApplyMode: all # 应用场景
+```
+
+### meta
+
+此处为一些基本信息，用于表示规则的用途、需要注意、副作用、来源等，编译时会写入到`config.ini`中
+
+#### meta.\<lang\>.\<string\>
+
+lang 为标准的语言代码，string 为任意字符串
+
+示例：中文基本信息
+
+```yaml
+meta:
+  zh:
+    作用: 作用
+    介绍: 简介
+    来源: 来源
+```
+
+示例：英文、中文的基本信息，也是最基本的使用方式
+
+```yaml
+meta:
+  en:
+    name: name
+    desc: desc (Optional)
+    from: origin (Optional)
+  zh:
+    作用: 作用
+    介绍: 简介 (可选)
+    来源: 来源 (可选)
+```
+
+<Callout type="warning">
+  因为该项目是同时面向海外的，所以必须要提供英文信息，使用在线翻译的也行
+</Callout>
+
+### applyDefaultUser
+
+将当前规则应用到所有新建账户中，也就是写入到新用户的注册表中，仅用于注册表的根为`HKEY_CURRENT_USER`的注册表规则
+
+设置该项后，所有注册表根为`HKEY_CURRENT_USER`在 Sysprep 过程中会同时写入到新用户的注册表中
+
+无论是否设置该项，在桌面环境也会将相关规则写入到注册表中
+
+示例：需要将当前规则应用到所有新建账户中则将该键设置为`true`
+
+```yaml
+applyDefaultUser: true
+```
+
+示例：不需要则可以删除该键或者设置为 `false`
+
+```yaml
+applyDefaultUser: false
+```
+
+### tweaks
+
+调整、设置规则，也是对操作系统产生影响的配置
+
+#### tweaks.registry
+
+注册表规则
+
+##### tweaks.registry.\<rules\>
+
+可用的键为:
+
+- key: 注册表键名(路径) (必填)
+- valueName: 注册表键名 (必填) (action 为 delete 则可选)
+- type: 键的类型 (必填) (action 为 delete 则可选)
+- value: 值 (必填) (action 为 delete 则可选)
+- action: 动作 (可选)
+
+键的类型、值:
+
+- key: string
+- valueName: string
+- type: "REG_SZ" | "REG_MULTI_SZ" | "REG_EXPAND_SZ" | "REG_DWORD" | "REG_QWORD" | "REG_BINARY"
+- value: string
+- action: "delete"
+
+`type` 值支持 `REG_SZ`, `REG_MULTI_SZ`, `REG_EXPAND_SZ`, `REG_DWORD`, `REG_QWORD`, `REG_BINARY`
+
+`action` 值只支持 `delete`, 则只支持删除动作
+
+示例：新建、修改注册表的值
+
+```yaml
+tweaks:
+  registry:
+    - key: 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Feeds'
+      valueName: "ShellFeedsTaskbarViewMode"
+      type: "REG_DWORD"
+      value: "2"
+```
+
+示例：新建、修改多个注册表的值
+
+```yaml
+tweaks:
+  registry:
+    - key: 'HKEY_CURRENT_USER\Software\Microsoft\CTF\LangBar'
+      valueName: "ShowStatus"
+      type: "REG_DWORD"
+      value: "4"
+    - key: 'HKEY_CURRENT_USER\Software\Microsoft\CTF\LangBar'
+      valueName: "ExtraIconsOnMinimized"
+      type: "REG_DWORD"
+      value: "0"
+		- key: 'HKEY_CLASSES_ROOT\Directory\shellex\-ContextMenuHandlers\Offline Files'
+      valueName: ""
+      type: "REG_SZ"
+      value: "{474C98EE-CF3D-41f5-80E3-4AAB0AB04301}"
+```
+
+示例：删除注册表
+
+```yaml
+tweaks:
+  registry:
+    - key: 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run'
+      valueName: "OneDriveSetup"
+      action: delete
+		- key: 'HKEY_CLASSES_ROOT\Directory\shellex\ContextMenuHandlers\Offline Files'
+      action: delete
+```
+
+#### tweaks.run
+
+运行规则，可以运行任何 cmd, powershell 命令以及任何程序
+
+<Callout type="warning">
+  请勿在此运行任何需要交互、可能会出现中断窗口的命令！
+</Callout>
+
+##### tweaks.run.\<rules\>
+
+可用的键为:
+
+- command: 需要运行的命令 (必填)
+- action: 运行方式 (可选)
+- showWindow: 是否显示运行的程序窗口 (可选)
+- defaultApplyMode: 应用场景 (可选)
+
+键的类型、值:
+
+- command: string
+- action: "cmd" | "pwsh"
+- showWindow: boolean
+- defaultApplyMode: "sysprep" | "desktop" | "all"
+
+`showWindow` 为是否显示运行的程序窗口，留空或默认为不显示(false)
+
+`action` 为命令运行方式，留空或默认为 `cmd`，`pwsh` 为 PowerShell
+
+内部运行命令为：
+
+```bat
+cmd:
+cmd /c <command>
+
+PowerShell:
+powershell -command <command>
+```
+
+`defaultApplyMode` 为运行模式，`sysprep` 为仅在 "Sysprep 中" 执行，`desktop` 为仅在 "桌面环境" 执行，`all` 会在 "Sysprep 中"、"桌面环境" **分别**执行，也就是执行两次
+
+示例：运行一条命令
+
+```yaml
+tweaks:
+  run:
+    - command: "powercfg.exe /hibernate off"
+```
+
+示例：运行多条命令，有一条使用 PowerShell 运行
+
+```yaml
+tweaks:
+  run:
+    - command: "powercfg.exe /hibernate off"
+    - command: 'Disable-ComputerRestore -Drive "$env:SYSTEMDRIVE"'
+      action: pwsh
+```
+
+示例：运行多条命令，有一条使用 PowerShell 运行，并且仅在桌面环境运行，同时显示命令运行窗口
+
+```yaml
+tweaks:
+  run:
+    - command: "powercfg.exe /hibernate off"
+    - command: 'Disable-ComputerRestore -Drive "$env:SYSTEMDRIVE"'
+      action: pwsh
+      defaultApplyMode: desktop
+      showWindow: true
+```
+## 疑问/建议
+
+前往 "[Discussions](https://github.com/whatk233/tis/discussions)"

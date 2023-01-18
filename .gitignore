@@ -1,6 +1,14 @@
 src/test.ts
 src/**/BackUp/*_old*.au3
 build/
-.env
 deno.lock
 src/core/test.au3
+
+docs/node_modules
+docs/.next/
+docs/out/
+
+.DS_Store
+*.pem
+.env
+.vercel

@@ -1,0 +1,11 @@
+{
+  "index": "Introductions",
+  "contribution": "Contribution",
+  "config": "Config",
+  "advanced": "Advanced",
+  "github_link": {
+    "title": "Github",
+    "href": "https://github.com/whatk233/tis",
+    "newWindow": true
+  }
+}
