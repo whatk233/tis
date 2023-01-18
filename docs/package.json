@@ -1,0 +1,18 @@
+{
+	"name": "tis-documentation",
+  "version": "0.1.1",
+  "description": "TIS Documentation",
+  "author": "Whatk <i@whatk.me>",
+  "homepage": "https://tis.whatk.me/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/whatk233/tis.git"
+  },
+	"dependencies": {
+		"next": "^13.1.2",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"nextra": "^2.2.3",
+		"nextra-theme-docs": "^2.2.3"
+	}
+}

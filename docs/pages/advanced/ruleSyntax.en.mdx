@@ -1,0 +1,262 @@
+import { Callout } from "nextra-theme-docs";
+
+# Rule Syntax
+
+## What is YAML?
+
+YAML is a data serialization language that is often used for writing configuration files. Depending on whom you ask, YAML stands for yet another markup language or YAML ain’t markup language (a recursive acronym), which emphasizes that YAML is for data, not documents. 
+
+YAML has the suffixes `.yaml`, `.yml`, but TIS currently only recognises `.yaml` rule files.
+
+### YAML Tutorials
+
+- [YAML Tutorial](https://www.tutorialspoint.com/yaml/index.htm)
+- [Learn yaml in Y Minutes](https://learnxinyminutes.com/docs/yaml/)
+
+## Rules folder
+In the project folder `/tweaks`
+
+## Naming Rules
+
+The exact rules are to be determined, for now you can use the existing configuration file for naming.
+
+You must use capital letters at the beginning and no spaces or non-English characters in the file name.
+
+Please do not use meaningless names such as `111111`, `aaaaa`, `fje9fhj9e` or other plain or garbled characters.
+
+## Syntax
+
+### Example
+
+```yaml
+# Basic Information
+meta:
+  en:
+    name: name
+    desc: desc (Optional)
+    from: origin (Optional)
+  zh:
+    作用: 作用
+    介绍: 简介 (可选)
+    来源: 来源 (可选)
+# Apply to all new user
+applyDefaultUser: true
+tweaks:
+  # Registry Rules
+  registry:
+    - key: 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Feeds' # Registry Key Name
+      valueName: "ShellFeedsTaskbarViewMode" # Registry Value Name
+      type: "REG_DWORD" # Type of key
+      value: "2" # Value
+    - key:
+      valueName: 'HKEY_CLASSES_ROOT\CLSID\{323CA680-C24D-4099-B94D-446DD2D7249E}\ShellFolder'
+      action: delete # Action for delete
+  # Rules of operation
+  run:
+    - command: "dism /Online /Set-ReservedStorageState /State:Disabled" # Run command
+      action: cmd # Action
+    - command: "powercfg.exe /hibernate off" # Run command
+      action: cmd # Action
+      showWindow: true # Display window
+      defaultApplyMode: desktop # Apply Mode
+    - command: 'Disable-ComputerRestore -Drive "$env:SYSTEMDRIVE"' # Run command
+      action: pwsh # Action
+      defaultApplyMode: all # Apply Mode
+```
+
+### meta
+
+This is where some basic information is written to `config.ini` to indicate what the rule is used for, what to look for, side effects, sources, etc. It is written to `config.ini` at compile time.
+
+#### meta.\<lang\>.\<string\>
+
+`lang` is the standard language code, string is an arbitrary string
+
+Example: Basic information in Chinese
+
+```yaml
+meta:
+  zh:
+    作用: 作用
+    介绍: 简介
+    来源: 来源
+```
+
+Example: Basic information in English and Chinese, and the most basic way to use it
+
+```yaml
+meta:
+  en:
+    name: name
+    desc: desc (Optional)
+    from: origin (Optional)
+  zh:
+    作用: 作用
+    介绍: 简介 (可选)
+    来源: 来源 (可选)
+```
+
+### applyDefaultUser
+
+Apply the rule to all new users, i.e. write to the new user's registry, only for registry rules with root `HKEY_CURRENT_USER`.
+
+After setting this item, all registry roots as `HKEY_CURRENT_USER` will be written to the new user's registry at the same time during the Sysprep process.
+
+Whether this key is set or not, relevant rules will also be written to the registry in the desktop environment
+
+Example: To apply the current rule to all new user set the key to `true`.
+
+```yaml
+applyDefaultUser: true
+```
+
+Example: You can delete the key or set it to `false` if you don't need it
+
+```yaml
+applyDefaultUser: false
+```
+
+### tweaks
+
+Tweaking, setting rules, and also configuration that affects the operating system
+
+#### tweaks.registry
+
+Registry Rules
+
+##### tweaks.registry.\<rules\>
+
+The available keys are :
+
+- key: registry key name (path) (required)
+- valueName: registry key name (required) (optional if action is delete)
+- type: type of key (required) (optional if action is delete)
+- value: Value (required) (optional if action is delete)
+- action: Action (optional)
+
+Type of key, value:
+
+- key: string
+- valueName: string
+- type: "REG_SZ" | "REG_MULTI_SZ" | "REG_EXPAND_SZ" | "REG_DWORD" | "REG_QWORD" | "REG_BINARY"
+- value: string
+- action: "delete"
+
+`type` value supports `REG_SZ`, `REG_MULTI_SZ`, `REG_EXPAND_SZ`, `REG_DWORD`, `REG_QWORD`, `REG_BINARY`
+
+`action` value only supports `delete`, then only delete actions are supported
+
+Example: Create and modified registry values
+
+```yaml
+tweaks:
+  registry:
+    - key: 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Feeds'
+      valueName: "ShellFeedsTaskbarViewMode"
+      type: "REG_DWORD"
+      value: "2"
+```
+
+Example: Create and modify multiple registry values
+
+```yaml
+tweaks:
+  registry:
+    - key: 'HKEY_CURRENT_USER\Software\Microsoft\CTF\LangBar'
+      valueName: "ShowStatus"
+      type: "REG_DWORD"
+      value: "4"
+    - key: 'HKEY_CURRENT_USER\Software\Microsoft\CTF\LangBar'
+      valueName: "ExtraIconsOnMinimized"
+      type: "REG_DWORD"
+      value: "0"
+		- key: 'HKEY_CLASSES_ROOT\Directory\shellex\-ContextMenuHandlers\Offline Files'
+      valueName: ""
+      type: "REG_SZ"
+      value: "{474C98EE-CF3D-41f5-80E3-4AAB0AB04301}"
+```
+
+Example: Deleting the registry
+
+```yaml
+tweaks:
+  registry:
+    - key: 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run'
+      valueName: "OneDriveSetup"
+      action: delete
+		- key: 'HKEY_CLASSES_ROOT\Directory\shellex\ContextMenuHandlers\Offline Files'
+      action: delete
+```
+
+#### tweaks.run
+
+Run rules, you can run any cmd, powershell command and any program
+
+<Callout type="warning">
+  Do not run any commands here that require interaction and may result in an interrupted window!
+</Callout>
+
+##### tweaks.run.\<rules\>
+
+The available keys are:
+
+- command: The command to be run (required)
+- action: How to run (optional)
+- showWindow: Whether to show the running program window (optional)
+- defaultApplyMode: Application scenario (optional)
+
+Type of key, value:
+
+- command: string
+- action: "cmd" | "pwsh"
+- showWindow: boolean
+- defaultApplyMode: "sysprep" | "desktop" | "all"
+
+`showWindow` is whether to show the running program window, leave it blank or default to not show (false)
+
+`action` is the command run mode, leave blank or default is `cmd`, `pwsh` is PowerShell
+
+The internal run command is.
+
+```bat
+cmd:
+cmd /c <command>
+
+PowerShell:
+powershell -command <command>
+```
+
+`defaultApplyMode` is the run mode, `sysprep` is executed in "Sysprep" only, `desktop` is executed in "desktop environment" only, `all` will be executed in "Sysprep" and "desktop environment", i.e. executed twice
+
+Example: Run a command
+
+```yaml
+tweaks:
+  run:
+    - command: "powercfg.exe /hibernate off"
+```
+
+Example: Run multiple commands, one using PowerShell
+
+```yaml
+tweaks:
+  run:
+    - command: "powercfg.exe /hibernate off"
+    - command: 'Disable-ComputerRestore -Drive "$env:SYSTEMDRIVE"'
+      action: pwsh
+```
+
+Example: Run multiple commands, one using PowerShell, and only in the desktop environment, while displaying the command run window
+
+```yaml
+tweaks:
+  run:
+    - command: "powercfg.exe /hibernate off"
+    - command: 'Disable-ComputerRestore -Drive "$env:SYSTEMDRIVE"'
+      action: pwsh
+      defaultApplyMode: desktop
+      showWindow: true
+```
+## Questions / Suggestions
+
+"[Discussions](https://github.com/whatk233/tis/discussions)"

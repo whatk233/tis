@@ -1,0 +1,23 @@
+import { Callout } from "nextra-theme-docs";
+
+# Development
+
+<Callout type="warning">
+  If you just want to use TIS, do the following [Usage](/#%EF%B8%8F-usage)
+</Callout>
+
+## Environment
+
+- Deno (1.29.3 or higher)
+- [Autoit Compiler Toolkit](https://github.com/whatk233/setup-autoit-compiler-toolkit/releases/download/toolkit/autoit_compiler_toolkit_v3.3.16.1_230116.zip)
+- Windows operating system (required to compile TIS Core)
+
+## Configuring the development environment
+
+1. Install Deno
+2. Download the Autoit Compiler Toolkit and unzip it
+3. Set Autoit Compiler Toolkit as a system/environment variable named `AUTOIT_COMPILER_TOOLKIT`.
+
+## Compiling TIS Core
+
+Execute `deno task build` and the compiled binaries and configuration files will be stored in the `/build` folder
