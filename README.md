@@ -23,7 +23,7 @@ Run `tis.exe /tweak` during the "Sysprep process" and "when you first enter the 
 There is no prompt during the execution, and it will exit automatically after completion		
 
 ## 👥 Contributions
-The tweak rules of TIS are in need of your contribution, please see "Contribution" for details
+The tweak rules of TIS are in need of your contribution, please see "<a href='https://tis.whatk.me/zh/contribution' target='_blank'>Contribution</a>" for details
 
 ## 👥 Feedback
 Go to "[Issues](https://github.com/whatk233/tis/issues)"

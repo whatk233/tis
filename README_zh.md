@@ -23,7 +23,7 @@
 执行过程中暂无任何提示，完成后会自动退出		
 
 ## 👥 贡献
-TIS 的应用规则非常需要你进行贡献，详情请看“贡献”
+TIS 的应用规则非常需要你进行贡献，详情前往“<a href='https://tis.whatk.me/zh/contribution' target='_blank'>贡献</a>”
 
 ## 👥 问题反馈
 前往 "[Issues](https://github.com/whatk233/tis/issues)"
