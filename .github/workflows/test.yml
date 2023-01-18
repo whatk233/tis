@@ -1,0 +1,26 @@
+name: Test
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  core-build-test:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Autoit Compiler Toolkit
+        uses: whatk233/setup-autoit-compiler-toolkit@main
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1.1.1
+        with:
+          deno-version: v1.x
+
+      - name: Generate/Build TIS Core
+        run: 'deno task build'
+
+      - name: Check tis.exe exists
+        run: 'Get-Item $env:GITHUB_WORKSPACE\build\tis.exe'
