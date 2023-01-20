@@ -1,7 +1,7 @@
 import "dotenvLoad";
 import chalk from "chalk";
 import { resolve } from "path";
-import { TEMPDIR, TIS_VERSION } from "./constants.ts";
+import { TEMPDIR } from "./constants.ts";
 import {
   generateIniSection,
   generateTweakFunc,
@@ -18,14 +18,17 @@ import { getShortCommit } from "./utils/git.ts";
 import * as log from "./utils/log.ts";
 import { log as l } from "./utils/log.ts";
 import { buildTis } from "./autoit/build.ts";
+import getVersion from "./utils/version.ts";
+
+const tisVersion = getVersion();
 
 const DISABLE_DELETE_TEMPDIR = Deno.env.get("DISABLE_DELETE_TEMPDIR")
   ? true
   : false;
 
 log.info(
-  `⭐ TIS - ${TIS_VERSION} (${await getShortCommit()})`,
-  "(https://tis.whatk.me)"
+  `⭐ TIS - ${tisVersion} (${await getShortCommit()})`,
+  "(https://tis.whatk.me)",
 );
 
 const ruleList = getRuleList();

@@ -1,12 +1,10 @@
-import {
-  TEMPDIR,
-  TIS_BUILDTIME,
-  TIS_VERSION,
-  TWEAK_INCLUDE_NAME,
-} from "../constants.ts";
+import { TEMPDIR, TIS_BUILDTIME, TWEAK_INCLUDE_NAME } from "../constants.ts";
 import { copySync, emptyDirSync, ensureFileSync } from "fs";
 import { resolve } from "path";
 import { getShortCommit } from "./git.ts";
+import getVersion from "./version.ts";
+
+const tisVersion = getVersion();
 
 export function cpCore() {
   if (!TEMPDIR.includes(".TIS_TEMP")) {
@@ -51,7 +49,7 @@ export async function replaceConstants(file: string) {
   const shortGitCommit = await getShortCommit();
   let data = Deno.readTextFileSync(file);
   const replaceArr = [
-    ["${G_VERSION}", TIS_VERSION],
+    ["${G_VERSION}", tisVersion],
     ["${G_BUILDTIME}", TIS_BUILDTIME],
     ["${G_SHORTCOMMIT}", shortGitCommit],
   ];
