@@ -1,22 +1,16 @@
+import Analytics from "./components/Analytics";
+
 export default {
-  head: (
-    <>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta property="og:title" content="TIS" />
-      <meta property="og:description" content="Tweak windows In Sysprep" />
-      {process.env.UMAMI_URL && process.env.UMAMI_ID
-        ? (
-          <script
-            async
-            defer
-            data-website-id={process.env.U_ID}
-            src={process.env.U_URL}
-          >
-          </script>
-        )
-        : <></>}
-    </>
-  ),
+  head: () => {
+    return (
+      <>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta property="og:title" content="TIS" />
+        <meta property="og:description" content="Tweak windows In Sysprep" />
+        <Analytics />
+      </>
+    );
+  },
   footer: {
     text: (
       <div>
