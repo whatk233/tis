@@ -34,6 +34,7 @@ jobs:
 
       - name: Create release
         run: |
+          cd ${env:GITHUB_WORKSPACE}
           gh release create "v${env:TIS_VERSION}" -t "v${env:TIS_VERSION}"
           gh release upload "v${env:TIS_VERSION}" build\*.zip --clobber
           gh release view "v${env:TIS_VERSION}"
