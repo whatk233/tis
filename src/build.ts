@@ -26,9 +26,12 @@ const DISABLE_DELETE_TEMPDIR = Deno.env.get("DISABLE_DELETE_TEMPDIR")
   ? true
   : false;
 
+const GITHUB_ENV = Deno.env.get("GITHUB_ENV");
+const shortGitCommit = await getShortCommit();
+
 log.info(
-  `⭐ TIS - ${tisVersion} (${await getShortCommit()})`,
-  "(https://tis.whatk.me)",
+  `⭐ TIS - ${tisVersion} (${shortGitCommit})`,
+  "(https://tis.whatk.me)"
 );
 
 const ruleList = getRuleList();
@@ -60,6 +63,15 @@ log.info(`🔨 Start build`);
 await buildTis();
 if (!DISABLE_DELETE_TEMPDIR) {
   delTempdir();
+}
+if (GITHUB_ENV) {
+  await Deno.writeTextFile(
+    GITHUB_ENV,
+    `\nTIS_VERSION=${tisVersion}\nTIS_SHORTHASH=${shortGitCommit}`,
+    {
+      append: true,
+    }
+  );
 }
 log.success(`✅ Build completed!`);
 Deno.exit(0);

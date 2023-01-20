@@ -1,0 +1,41 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  core-release:
+    runs-on: windows-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Autoit Compiler Toolkit
+        uses: whatk233/setup-autoit-compiler-toolkit@main
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1.1.1
+        with:
+          deno-version: v1.x
+
+      - name: Generate/Build TIS Core
+        run: "deno task build"
+
+      - name: Check tis.exe exists
+        run: 'Get-Item $env:GITHUB_WORKSPACE\build\tis.exe'
+
+      - name: Compress Zip
+        run: 'Compress-Archive -Path $env:GITHUB_WORKSPACE\build\* -DestinationPath ${env:GITHUB_WORKSPACE}\build\TIS_${env:TIS_VERSION}_${env:TIS_SHORTHASH}.zip'
+        shell: powershell
+
+      - name: Create release
+        run: |
+          gh release create "v${env:TIS_VERSION}" -t "v${env:TIS_VERSION}"
+          gh release upload "v${env:TIS_VERSION}" build\*.zip --clobber
+          gh release view "v${env:TIS_VERSION}"
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
