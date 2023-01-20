@@ -4,8 +4,12 @@
 
 > Tweak windows In Sysprep
 
+![GitHub Repo stars](https://img.shields.io/github/stars/whatk233/tis?style=social) 
+
+![GitHub](https://img.shields.io/github/license/whatk233/tis?style=for-the-badge) 
+
 ## 📄 Introduction
-It makes it easier to tweak/setup (optimize) Windows in the Sysprep, and makes the tweaking rules open source and simple to understand clearly what changes are made to the system in addition to the community power to manage the tweaking rules.
+TIS makes it easier to tweak/set up (optimize) Windows in the Sysprep, and makes the tweak rules open source and simple to understand clearly what changes have been made to the system in addition to the community power to manage the tune rules.
 
 ## ⭐ Features
 * Open source, tweak rules are maintained based on the community, and you can also see what changes the tweak rules have made to the system
@@ -23,13 +27,21 @@ Run `tis.exe /tweak` during the "Sysprep process" and "when you first enter the 
 There is no prompt during the execution, and it will exit automatically after completion		
 
 ## 👥 Contributions
-The tweak rules of TIS are in need of your contribution, please see "<a href='https://tis.whatk.me/zh/contribution' target='_blank'>Contribution</a>" for details
+The tweak rules of TIS are in need of your contribution, please see "<a href='https://tis.whatk.me/contribution' target='_blank'>Contribution</a>" for details
 
 ## 👥 Feedback
 Go to "[Issues](https://github.com/whatk233/tis/issues)"
 
 ## 👥 Discussions
 Go to "[Discussions](https://github.com/whatk233/tis/discussions)"
+
+## 👥 Contributors
+<a href="https://github.com/whatk233/tis/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=whatk233/tis" />
+</a>
+
+## 😲 Who is using TIS ?
+- [Windsys Project](https://windsys.win)
 
 ## ❤️ Donate
 <a href='https://ko-fi.com/whatk' target='_blank'>Buy Me a Coffee</a> · <a href='https://afdian.net/@whatk' target='_blank'>爱发电</a>
