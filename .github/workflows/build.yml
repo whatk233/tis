@@ -28,7 +28,7 @@ jobs:
         run: 'Get-Item $env:GITHUB_WORKSPACE\build\tis.exe'
 
       - name: Compress Zip
-        run: 'Compress-Archive -Path $env:GITHUB_WORKSPACE\build\* -DestinationPath ${env:GITHUB_WORKSPACE}\build\TIS_${env:TIS_VERSION}_${env.GITHUB_REF_NAME}_${env:TIS_SHORTHASH}.zip'
+        run: 'Compress-Archive -Path $env:GITHUB_WORKSPACE\build\* -DestinationPath ${env:GITHUB_WORKSPACE}\build\TIS_${env:TIS_VERSION}_${env:GITHUB_REF_NAME}_${env:TIS_SHORTHASH}.zip'
         shell: powershell
 
       - name: Upload artifact
