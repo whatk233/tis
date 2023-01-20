@@ -36,7 +36,7 @@ jobs:
         run: |
           cd ${env:GITHUB_WORKSPACE}\build
           gh release create "v${env:TIS_VERSION}" -t "v${env:TIS_VERSION}"
-          gh release upload "v${env:TIS_VERSION}" *.zip --clobber
+          gh release upload "v${env:TIS_VERSION}" "TIS_${env:TIS_VERSION}_${env:TIS_SHORTHASH}.zip" --clobber
           gh release view "v${env:TIS_VERSION}"
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
