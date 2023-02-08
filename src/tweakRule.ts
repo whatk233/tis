@@ -8,6 +8,7 @@ import {
   generateRunCommand,
   generateTweakFuncBlock,
 } from "./autoit/generate.ts";
+import { yamlOrYml } from "./utils/file.ts";
 
 interface TweakConfig {
   meta: {
@@ -44,22 +45,43 @@ interface TweakConfig {
 }
 
 export function getRuleList() {
-  const result = [];
-  const tweaksRuleDir = Deno.readDirSync(resolve(TWEAK_RULE_PATH));
-  for (const dirEntry of tweaksRuleDir) {
-    if (dirEntry.isFile && extname(dirEntry.name) == ".yaml") {
-      const tweakFileObj = {
-        name: dirEntry.name.replace(".yaml", ""),
-        fileName: dirEntry.name,
-      };
-      result.push(tweakFileObj);
+  const extNameRegex = /\.yaml|\.yml/;
+  const result: { name: string; fileName: string }[] = [];
+  const nestedDir = (path: string) => {
+    const dirPath = resolve(
+      TWEAK_RULE_PATH,
+      path[0] == "/" ? path.substring(1) : path
+    );
+    const nested_dir = Deno.readDirSync(dirPath);
+    for (const dirEntry of nested_dir) {
+      if (
+        dirEntry.isFile &&
+        (extname(dirEntry.name) == ".yaml" || extname(dirEntry.name) == ".yml")
+      ) {
+        // Remove the "/" before the beginning of the path
+        const fileName =
+          path == ""
+            ? dirEntry.name
+            : path[0] == "/"
+            ? `${path.substring(1)}/${dirEntry.name}`
+            : `${path}/${dirEntry.name}`;
+        const name = fileName.replace(extNameRegex, "");
+        const tweakFileObj = {
+          name,
+          fileName,
+        };
+        result.push(tweakFileObj);
+      } else if (dirEntry.isDirectory) {
+        nestedDir(`${path}/${dirEntry.name}`);
+      }
     }
-  }
+  };
+  nestedDir("");
   return result;
 }
 
 export function parse(name: string) {
-  const file = Deno.readTextFileSync(resolve(TWEAK_RULE_PATH, `${name}.yaml`));
+  const file = Deno.readTextFileSync(resolve(TWEAK_RULE_PATH, yamlOrYml(name)));
   const result = yamlParse(file);
   return result;
 }

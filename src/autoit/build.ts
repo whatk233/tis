@@ -1,6 +1,6 @@
 import { AUTOIT3WRAPPER_PATH, TEMPDIR } from "../constants.ts";
 import { resolve } from "path";
-import { emptyDirSync } from "fs";
+import { emptyDirSync } from "https://deno.land/std@0.160.0/fs/mod.ts";
 import * as log from "../utils/log.ts";
 import { log as l } from "../utils/log.ts";
 
