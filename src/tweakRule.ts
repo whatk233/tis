@@ -3,6 +3,7 @@ import { extname, resolve } from "path";
 import { parse as yamlParse } from "yaml";
 import { stringify as iniStringify } from "ini";
 import {
+  generateCustomCommand,
   generateRegDelete,
   generateRegWrite,
   generateRunCommand,
@@ -39,6 +40,11 @@ interface TweakConfig {
           action: "pwsh" | "cmd" | null | undefined;
           showWindow: boolean | undefined | null;
           defaultApplyMode: "sysprep" | "desktop" | "all" | undefined | null;
+        }[]
+      | undefined;
+    custom:
+      | {
+          name: string;
         }[]
       | undefined;
   };
@@ -91,6 +97,7 @@ export function generateTweakFunc(name: string) {
   const tweakParse = parse(name) as TweakConfig;
   const registryTweak = tweakParse.tweaks.registry;
   const runTweak = tweakParse.tweaks.run;
+  const customTweak = tweakParse.tweaks.custom;
   if (registryTweak && registryTweak.length > 0) {
     registryTweak.map((reg) => {
       const { key, type, valueName, value, action } = reg;
@@ -124,6 +131,11 @@ export function generateTweakFunc(name: string) {
           defaultApplyMode,
         })
       );
+    });
+  }
+  if (customTweak && customTweak.length > 0) {
+    customTweak.map((item) => {
+      tweakCode.push(generateCustomCommand(item.name));
     });
   }
   return generateTweakFuncBlock(name, tweakCode.join("\n"));

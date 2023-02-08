@@ -1,5 +1,6 @@
 #include-once
 #include "..\constants.au3"
+#include "config.au3"
 
 Func _msg($sText)
 	MsgBox(64, $G_NAME, $sText)
@@ -96,3 +97,43 @@ Func _RunCmd($sCommand, $bShowWindow = False)
 		Return RunWait(@ComSpec & " /c " & $sCommand, "", @SW_HIDE)
 	EndIf
 EndFunc   ;==>_RunCmd
+
+;~ Check tweak apply requirements
+Func _CheckRequireMents($sName, $sMode = "all")
+;~ 	tweak is apply?
+	If _Config_Tweak_IsApply($sName) <> True Then
+		Return False
+	EndIf ;==>_CheckRequireMents
+	
+	Const $Config_Tweak_ApplyMode = _Config_Tweak_ApplyMode($sName)
+	If $Config_Tweak_ApplyMode = "sysprep" Then
+		$sMode = "sysprep"
+	ElseIf $Config_Tweak_ApplyMode = "desktop" Then
+		$sMode = "desktop"
+	ElseIf $Config_Tweak_ApplyMode = "all" Then
+		$sMode = "all"
+	Else
+		$sMode = "all"
+	EndIf
+	
+	If $sMode <> "all" Then
+;~ 		Requires apply in sysprep, but is not currently a sysprep environment
+		If $sMode = "sysprep" Then
+			If $G_IsSysprepEnv <> True Then
+				Return False
+			EndIf
+		ElseIf $sMode = "desktop" Then
+			If $G_IsSysprepEnv Then
+				Return False
+			EndIf
+		EndIf
+	EndIf
+	
+	Return True
+	
+EndFunc   ;==>_CheckRequireMents
+
+Func _Restart_Explorer()
+	ProcessClose("explorer.exe")
+	Run("%SystemDrive%\Windows\Explorer.EXE", "%SystemDrive%\Windows\Explorer.EXE")
+EndFunc   ;==>_Restart_Explorer

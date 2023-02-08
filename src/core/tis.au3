@@ -19,6 +19,7 @@
 #include "include\utils.au3"
 #include "include\tweak.au3"
 #include "include\config.au3"
+#include "custom\_include.au3"
 
 If @OSArch = 'x64' Then
 	_WinAPI_Wow64EnableWow64FsRedirection(True)
@@ -48,5 +49,6 @@ EndFunc   ;==>_Tweak
 
 Func _Exit()
 	_UnMount_NTUSER_Reg()
+	If $G_IsSysprepEnv = False Then _Restart_Explorer()
 EndFunc   ;==>_Exit
 

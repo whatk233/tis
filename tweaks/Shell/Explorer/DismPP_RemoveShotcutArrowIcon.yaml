@@ -1,0 +1,9 @@
+meta:
+  en:
+    name: Remove Shotcut Arrow Icon
+  zh:
+    name: 隐藏快捷方式图标上的小箭头
+restartExplorer: true
+tweaks:
+  custom:
+    - name: "_Custom_RemoveShotcutArrowIcon"
