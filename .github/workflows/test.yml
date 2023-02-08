@@ -7,7 +7,7 @@ on:
 jobs:
   core-build-test:
     runs-on: windows-latest
-    timeout-minutes: 10
+    timeout-minutes: 3
     steps:
       - uses: actions/checkout@v3
 
