@@ -3,11 +3,13 @@ import { extname, resolve } from "path";
 import { parse as yamlParse } from "yaml";
 import { stringify as iniStringify } from "ini";
 import {
+  generateCustomCommand,
   generateRegDelete,
   generateRegWrite,
   generateRunCommand,
   generateTweakFuncBlock,
 } from "./autoit/generate.ts";
+import { yamlOrYml } from "./utils/file.ts";
 
 interface TweakConfig {
   meta: {
@@ -40,26 +42,52 @@ interface TweakConfig {
           defaultApplyMode: "sysprep" | "desktop" | "all" | undefined | null;
         }[]
       | undefined;
+    custom:
+      | {
+          name: string;
+        }[]
+      | undefined;
   };
 }
 
 export function getRuleList() {
-  const result = [];
-  const tweaksRuleDir = Deno.readDirSync(resolve(TWEAK_RULE_PATH));
-  for (const dirEntry of tweaksRuleDir) {
-    if (dirEntry.isFile && extname(dirEntry.name) == ".yaml") {
-      const tweakFileObj = {
-        name: dirEntry.name.replace(".yaml", ""),
-        fileName: dirEntry.name,
-      };
-      result.push(tweakFileObj);
+  const extNameRegex = /\.yaml|\.yml/;
+  const result: { name: string; fileName: string }[] = [];
+  const nestedDir = (path: string) => {
+    const dirPath = resolve(
+      TWEAK_RULE_PATH,
+      path[0] == "/" ? path.substring(1) : path
+    );
+    const nested_dir = Deno.readDirSync(dirPath);
+    for (const dirEntry of nested_dir) {
+      if (
+        dirEntry.isFile &&
+        (extname(dirEntry.name) == ".yaml" || extname(dirEntry.name) == ".yml")
+      ) {
+        // Remove the "/" before the beginning of the path
+        const fileName =
+          path == ""
+            ? dirEntry.name
+            : path[0] == "/"
+            ? `${path.substring(1)}/${dirEntry.name}`
+            : `${path}/${dirEntry.name}`;
+        const name = fileName.replace(extNameRegex, "");
+        const tweakFileObj = {
+          name,
+          fileName,
+        };
+        result.push(tweakFileObj);
+      } else if (dirEntry.isDirectory) {
+        nestedDir(`${path}/${dirEntry.name}`);
+      }
     }
-  }
+  };
+  nestedDir("");
   return result;
 }
 
 export function parse(name: string) {
-  const file = Deno.readTextFileSync(resolve(TWEAK_RULE_PATH, `${name}.yaml`));
+  const file = Deno.readTextFileSync(resolve(TWEAK_RULE_PATH, yamlOrYml(name)));
   const result = yamlParse(file);
   return result;
 }
@@ -69,6 +97,7 @@ export function generateTweakFunc(name: string) {
   const tweakParse = parse(name) as TweakConfig;
   const registryTweak = tweakParse.tweaks.registry;
   const runTweak = tweakParse.tweaks.run;
+  const customTweak = tweakParse.tweaks.custom;
   if (registryTweak && registryTweak.length > 0) {
     registryTweak.map((reg) => {
       const { key, type, valueName, value, action } = reg;
@@ -102,6 +131,11 @@ export function generateTweakFunc(name: string) {
           defaultApplyMode,
         })
       );
+    });
+  }
+  if (customTweak && customTweak.length > 0) {
+    customTweak.map((item) => {
+      tweakCode.push(generateCustomCommand(item.name));
     });
   }
   return generateTweakFuncBlock(name, tweakCode.join("\n"));

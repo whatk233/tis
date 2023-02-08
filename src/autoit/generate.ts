@@ -66,3 +66,7 @@ export function generateTweakFuncBlock(name: string, str: string) {
   };
   return ifBlock();
 }
+
+export function generateCustomCommand(name:string) {
+	return `${name}()`
+}

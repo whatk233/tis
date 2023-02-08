@@ -1,5 +1,14 @@
-import { TEMPDIR, TIS_BUILDTIME, TWEAK_INCLUDE_NAME } from "../constants.ts";
-import { copySync, emptyDirSync, ensureFileSync } from "fs";
+import {
+  TEMPDIR,
+  TIS_BUILDTIME,
+  TWEAK_INCLUDE_NAME,
+  TWEAK_RULE_PATH,
+} from "../constants.ts";
+import {
+  copySync,
+  emptyDirSync,
+  ensureFileSync,
+} from "https://deno.land/std@0.160.0/fs/mod.ts";
 import { resolve } from "path";
 import { getShortCommit } from "./git.ts";
 import getVersion from "./version.ts";
@@ -16,12 +25,12 @@ export function cpCore() {
     if (file.isDirectory) {
       copySync(
         resolve(".", "src", "core", file.name),
-        resolve(TEMPDIR, file.name),
+        resolve(TEMPDIR, file.name)
       );
     } else if (file.isFile) {
       Deno.copyFileSync(
         resolve(".", "src", "core", file.name),
-        resolve(TEMPDIR, file.name),
+        resolve(TEMPDIR, file.name)
       );
     }
   }
@@ -68,7 +77,7 @@ export const writeAutoitFile = {
   done() {
     writeTextToFile(
       resolve(TEMPDIR, TWEAK_INCLUDE_NAME),
-      this.codes.join("\n").trim(),
+      this.codes.join("\n").trim()
     );
   },
 };
@@ -83,7 +92,23 @@ export const writeConfigFile = {
     this.config.unshift(`; TIS https://tis.whatk.me`);
     writeTextToFile(
       resolve(TEMPDIR, "build", "config.ini"),
-      this.config.join("\n").trim(),
+      this.config.join("\n").trim()
     );
   },
+};
+
+export const yamlOrYml = (name: string, path = TWEAK_RULE_PATH) => {
+  const yamlName = `${name}.yaml`;
+  const ymlName = `${name}.yml`;
+  try {
+    Deno.statSync(resolve(path, yamlName)).isFile;
+    return yamlName;
+  } catch {
+    try {
+      Deno.statSync(resolve(path, ymlName)).isFile;
+      return ymlName;
+    } catch {
+      throw new Error("File does not exists!");
+    }
+  }
 };

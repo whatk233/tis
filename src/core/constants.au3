@@ -17,3 +17,5 @@ Global Const $G_CONFIG_PATH = @ScriptDir & "\" & $G_CONFIG_NAME
 
 Global Const $G_NTUSER_MOUNT_ROOT = "HKLM\WIS_NTUSER"
 Global Const $G_NTUSER_MOUNT_ROOT64 = $G_HKLM & "\WIS_NTUSER"
+
+Global Const $G_IsSysprepEnv = _IsSysprepEnv()

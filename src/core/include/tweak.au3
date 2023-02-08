@@ -85,6 +85,8 @@ Func _T_Run($sName, $sCommand, $sAction = "cmd", $bShowWindow = False, $sDefault
 		$sDefaultApplyMode = "desktop"
 	ElseIf $Config_Tweak_ApplyMode = "all" Then
 		$sDefaultApplyMode = "all"
+	Else
+		$sDefaultApplyMode = "sysprep"
 	EndIf
 	
 	If $Config_Tweak_ShowWindow Then
