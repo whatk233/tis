@@ -1,0 +1,20 @@
+meta:
+  en:
+    name: Disable System Restore
+    desc: "Ref: https://learn.microsoft.com/en-us/windows/win32/sr/systemrestoreconfig https://admx.help/?Category=Windows_10_2016&Policy=Microsoft.Policies.MSI::MSI_DisableSRCheckPoints https://admx.help/?Category=Windows_10_2016&Policy=Microsoft.Policies.SystemRestore::SR_DisableSR"
+  zh:
+    name: 禁用系统还原
+tweaks:
+  registry:
+    - key: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore'
+      valueName: "RPSessionInterval"
+      type: "REG_DWORD"
+      value: "0"
+    - key: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Installer'
+      valueName: "LimitSystemRestoreCheckpointing"
+      type: "REG_DWORD"
+      value: "1"
+    - key: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore'
+      valueName: "DisableSR"
+      type: "REG_DWORD"
+      value: "1"

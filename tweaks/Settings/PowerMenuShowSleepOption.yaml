@@ -1,0 +1,11 @@
+meta:
+  en:
+    name: Power button shows sleep
+  zh:
+    name: 电源按钮显示睡眠
+tweaks:
+  registry:
+    - key: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer'
+      valueName: "ShowSleepOption"
+      type: "REG_DWORD"
+      value: "1"

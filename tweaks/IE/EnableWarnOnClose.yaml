@@ -1,0 +1,12 @@
+meta:
+  en:
+    name: Warn when IE closes multiple tabs
+  zh:
+    name: IE 关闭多个标签页时发出警告
+applyDefaultUser: true
+tweaks:
+  registry:
+    - key: 'HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\TabbedBrowsing'
+      valueName: "WarnOnClose"
+      type: "REG_DWORD"
+      value: "1"

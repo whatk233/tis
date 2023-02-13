@@ -1,0 +1,12 @@
+meta:
+  en:
+    name: Disable Limit reservable bandwidth
+    desc: "Ref: https://admx.help/?Category=OneDrive&Policy=Microsoft.Policies.OneDriveNGSC::PreventNetworkTrafficPreUserSignIn"
+  zh:
+    name: 在用户登录前阻止 OneDrive 生成网络流量
+tweaks:
+  registry:
+    - key: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\OneDrive'
+      valueName: "PreventNetworkTrafficPreUserSignIn"
+      type: "REG_DWORD"
+      value: "1"

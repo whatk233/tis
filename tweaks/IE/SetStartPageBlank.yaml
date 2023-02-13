@@ -1,0 +1,16 @@
+meta:
+  en:
+    name: 'Set "about:blank" as the Startpage'
+  zh:
+    name: 设置空白页为浏览器主页
+applyDefaultUser: true
+tweaks:
+  registry:
+    - key: 'HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main'
+      valueName: "Start Page"
+      type: "REG_SZ"
+      value: "about:blank"
+    - key: 'HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main'
+      valueName: "Default_Page_URL"
+      type: "REG_SZ"
+      value: "about:blank"

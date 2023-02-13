@@ -1,0 +1,12 @@
+meta:
+  en:
+    name: Show "File name extensions"
+  zh:
+    name: 显示文件扩展名
+applyDefaultUser: true
+tweaks:
+  registry:
+    - key: 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
+      valueName: "HideFileExt"
+      type: "REG_DWORD"
+      value: "0"

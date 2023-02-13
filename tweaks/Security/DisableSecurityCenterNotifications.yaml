@@ -1,0 +1,19 @@
+meta:
+  en:
+    name: Disable Security Center Notifications
+  zh:
+    name: 关闭 Windows 安全中心通知
+tweaks:
+  registry:
+    - key: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications'
+      valueName: "DisableNotifications"
+      type: "REG_DWORD"
+      value: "1"
+    - key: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Security Center'
+      valueName: "AntiVirusDisableNotify"
+      type: "REG_DWORD"
+      value: "1"
+    - key: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Security Center'
+      valueName: "FirewallDisableNotify"
+      type: "REG_DWORD"
+      value: "1"

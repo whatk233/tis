@@ -1,0 +1,16 @@
+meta:
+  en:
+    name: Enable HTTP 1.1/1.2
+  zh:
+    name: 启用 HTTP 1.1/1.2
+applyDefaultUser: true
+tweaks:
+  registry:
+    - key: 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings'
+      valueName: "EnableHttp1_1"
+      type: "REG_DWORD"
+      value: "1"
+    - key: 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings'
+      valueName: "EnableHttp2"
+      type: "REG_DWORD"
+      value: "1"

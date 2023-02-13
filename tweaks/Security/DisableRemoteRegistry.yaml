@@ -1,0 +1,15 @@
+meta:
+  en:
+    name: Disable remote registry service
+  zh:
+    name: 禁止远程修改注册表
+tweaks:
+  registry:
+    - key: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurePipeServers\winreg'
+      valueName: "RemoteRegAccess"
+      type: "REG_DWORD"
+      value: "1"
+    - key: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\RemoteRegistry'
+      valueName: "Start"
+      type: "REG_DWORD"
+      value: "4"
