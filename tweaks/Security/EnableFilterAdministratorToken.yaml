@@ -1,0 +1,13 @@
+meta:
+  en:
+    name: Admin Approval Mode for the Built-in Administrator account
+    desc: https://learn.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/user-account-control-admin-approval-mode-for-the-built-in-administrator-account
+  zh:
+    name: 启用用于内置管理员帐户的管理员批准模式
+    desc: FilterAdministratorToken 是 Windows 的一个安全特性，用于防止未经授权的管理员权限访问。它通过分离管理员帐户的访问令牌来实现，从而保护系统免受恶意攻击。在 UAC（用户帐户控制）环境中，当用户试图使用管理员权限执行特定任务时，系统将使用 FilterAdministratorToken 来创建一个特殊的令牌，以便执行任务。这可以保证用户不能在不知不觉中使用管理员权限进行不安全的操作。——ChatGPT
+tweaks:
+  registry:
+    - key: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+      valueName: "FilterAdministratorToken"
+      type: "REG_DWORD"
+      value: "1"

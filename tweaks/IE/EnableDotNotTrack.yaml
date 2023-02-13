@@ -1,0 +1,12 @@
+meta:
+  en:
+    name: IE Enable sends "DoNotTrack" request
+  zh:
+    name: IE 发送不追踪请求
+applyDefaultUser: true
+tweaks:
+  registry:
+    - key: 'HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main'
+      valueName: "DoNotTrack"
+      type: "REG_SZ"
+      value: "1"

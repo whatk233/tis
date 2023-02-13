@@ -1,0 +1,19 @@
+meta:
+  en:
+    name: Disable Windows Error Reporting
+  zh:
+    name: 禁用 Windows 错误报告
+tweaks:
+  registry:
+    - key: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting'
+      valueName: "Disabled"
+      type: "REG_DWORD"
+      value: "1"
+    - key: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting'
+      valueName: "LoggingDisabled"
+      type: "REG_DWORD"
+      value: "1"
+    - key: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\PCHealth\ErrorReporting'
+      valueName: "DoReport"
+      type: "REG_DWORD"
+      value: "0"

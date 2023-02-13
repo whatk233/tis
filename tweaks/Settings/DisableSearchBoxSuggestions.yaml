@@ -1,0 +1,12 @@
+meta:
+  en:
+    name: Disable taskbar searchBox suggestions
+  zh:
+    name: 关闭任务栏搜索的搜索建议
+applyDefaultUser: true
+tweaks:
+  registry:
+    - key: 'HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Explorer'
+      valueName: "DisableSearchBoxSuggestions"
+      type: "REG_DWORD"
+      value: "1"

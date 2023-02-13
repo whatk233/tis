@@ -1,8 +1,14 @@
 meta:
   en:
     name: Disable system reserved storage
+    desc: After Windows 10 1903
   zh:
     name: 禁用系统保留空间
 tweaks:
   run:
     - command: "dism /Online /Set-ReservedStorageState /State:Disabled"
+  registry:
+    - key: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ReserveManager'
+      valueName: "ShippedWithReserves"
+      type: "REG_DWORD"
+      value: "0"

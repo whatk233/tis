@@ -1,0 +1,12 @@
+meta:
+  en:
+    name: IE enable ClearType
+  zh:
+    name: IE 启用 ClearType
+applyDefaultUser: true
+tweaks:
+  registry:
+    - key: 'HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main'
+      valueName: "UseClearType"
+      type: "REG_SZ"
+      value: "yes"

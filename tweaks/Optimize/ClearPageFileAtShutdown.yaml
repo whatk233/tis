@@ -1,0 +1,15 @@
+meta:
+  en:
+    name: Clear PageFile at shutdown
+  zh:
+    name: 关机时清理 Pagefile (虚拟内存页面文件)
+tweaks:
+  registry:
+    - key: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management'
+      valueName: "ClearPageFileAtShutdown"
+      type: "REG_DWORD"
+      value: "1"
+    - key: 'HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Session Manager\Memory Management'
+      valueName: "ClearPageFileAtShutdown"
+      type: "REG_DWORD"
+      value: "1"

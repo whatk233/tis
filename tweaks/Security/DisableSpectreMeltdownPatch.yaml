@@ -1,0 +1,16 @@
+meta:
+  en:
+    name: Disable Spectre,Meltdown Patch
+  zh:
+    name: 禁用 Spectre、Meltdown 漏洞缓解措施
+    desc: "Ref: https://www.landiannews.com/archives/58701.html  Ref: https://support.microsoft.com/en-us/topic/kb4073119-windows-client-guidance-for-it-pros-to-protect-against-silicon-based-microarchitectural-and-speculative-execution-side-channel-vulnerabilities-35820a8a-ae13-1299-88cc-357f104f5b11"
+tweaks:
+  registry:
+    - key: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management'
+      valueName: "FeatureSettingsOverride"
+      type: "REG_DWORD"
+      value: "3"
+    - key: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management'
+      valueName: "FeatureSettingsOverrideMask"
+      type: "REG_DWORD"
+      value: "3"

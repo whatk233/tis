@@ -1,0 +1,12 @@
+meta:
+  en:
+    name: Clean up recently opened document records when shutting down
+  zh:
+    name: 关机时清理最近打开的文档记录
+applyDefaultUser: true
+tweaks:
+  registry:
+    - key: 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer'
+      valueName: "ClearRecentDocsOnExit"
+      type: "REG_DWORD"
+      value: "1"
