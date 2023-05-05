@@ -1,0 +1,13 @@
+meta:
+  en:
+    name: Disable "Your data will be processed outside of your country or region" notice
+    from: https://support.microsoft.com/en-us/topic/kb5026964-users-who-log-on-using-a-local-user-account-receive-a-notice-after-april-11-2023-windows-updates-are-installed-cbaf97b4-471e-4b0c-ba61-a42238810fa0
+  zh:
+    name: 关闭”你的数据将在你所在的国家或地区之外进行处理“提示
+applyDefaultUser: true
+tweaks:
+  registry:
+    - key: 'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\CloudExperienceHost\Intent\PersonalDataExport'
+      valueName: "PDEShown"
+      type: "REG_DWORD"
+      value: "1"
