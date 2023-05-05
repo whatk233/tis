@@ -1,0 +1,12 @@
+meta:
+  en:
+    name: Taskbar alignment is centred (Win11)
+  zh:
+    name: 任务栏对齐方式为居中 (Win11)
+applyDefaultUser: true
+tweaks:
+  registry:
+    - key: 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
+      valueName: "TaskbarAl"
+      type: "REG_DWORD"
+      value: "1"
