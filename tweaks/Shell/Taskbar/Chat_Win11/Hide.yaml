@@ -1,0 +1,12 @@
+meta:
+  en:
+    name: Hide taskbar chat button (Win11)
+  zh:
+    name: 隐藏任务栏中的聊天按钮 (Win11)
+applyDefaultUser: true
+tweaks:
+  registry:
+    - key: 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
+      valueName: "TaskbarMn"
+      type: "REG_DWORD"
+      value: "0"
