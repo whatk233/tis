@@ -1,0 +1,12 @@
+meta:
+  en:
+    name: Enable Full(classics) Context Menu (Win11)
+  zh:
+    name: 恢复完整(经典)右键菜单 (Win11)
+applyDefaultUser: true
+tweaks:
+  registry:
+    - key: 'HKEY_CURRENT_USER\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32'
+      valueName: ""
+      type: "REG_DWORD"
+      value: ""
