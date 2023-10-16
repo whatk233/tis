@@ -1,10 +1,12 @@
 meta:
   en:
     name: Disable SmartScreen
+    ref: https://admx.help/?Category=Windows_8.1_2012R2&Policy=Microsoft.Policies.WindowsExplorer::EnableSmartScreen
   zh:
     name: 禁用 SmartScreen
 tweaks:
   registry:
     - key: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer'
       valueName: "SmartScreenEnabled"
-      action: delete
+      type: "REG_DWORD"
+      value: "0"
