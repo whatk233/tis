@@ -1,0 +1,13 @@
+meta:
+  en:
+    name: Disable "Your data will be processed outside of your country or region" notice (Applicable for updates after June 27, 2023)
+    ref: https://support.microsoft.com/help/5028723
+  zh:
+    name: 关闭”你的数据将在你所在的国家或地区之外进行处理“提示 (适用于 2023 年 6 月 27 日 后的更新)
+applyDefaultUser: true
+tweaks:
+  registry:
+    - key: 'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\CloudExperienceHost\Intent\PersonalDataExport'
+      valueName: "PDEShown"
+      type: "REG_DWORD"
+      value: "2"
